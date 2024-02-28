@@ -1,0 +1,263 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Zap",
+	"scopeName": "source.zap",
+	"patterns": [
+		{ "include": "#comments" },
+		{ "include": "#brackets" },
+		{ "include": "#autoClosingPairs" },
+		{ "include": "#objectAssignment" },
+		{ "include": "#surroundingPairs" },
+		{ "include": "#typeKeywords" },
+		{ "include": "#keywords" },
+		{ "include": "#types" },
+		{ "include": "#setting" },
+		{ "include": "#operators" },
+		{ "include": "#symbols" },
+		{ "include": "#tokenizer" }
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"begin": "--\\[([=]*)\\[",
+					"end": "\\]([=]*)\\]",
+					"captures": {
+						"0": { "name": "comment.block.documentation.zap" },
+						"1": { "name": "comment.block.documentation.zap" }
+					},
+					"name": "comment.block.documentation.zap"
+				},
+				{
+					"match": "--.*$",
+					"name": "comment.line.double-dash.zap"
+				}
+			]
+		},
+		"brackets": {
+			"patterns": [
+				{
+					"begin": "\\{",
+					"end": "\\}",
+					"name": "punctuation.section.braces.zap",
+					"patterns": [
+						{ "include": "#types" },
+						{ "include": "#typeKeywords" },
+						{ "include": "#operators" },
+						{ "include": "#setting" },
+						{ "include": "#symbols" },
+						{ "include": "#brackets" },
+						{
+							"match": "([a-zA-Z_]\\w*):",
+							"captures": {
+								"1": { "name": "variable.other.zap" }
+							}
+						},
+						{
+							"match": "([a-zA-Z_]\\w*)\\s*,",
+							"captures": {
+								"1": { "name": "variable.other.zap" },
+								"2": { "name": "variable.other.zap" }
+							},
+							"name": "meta.array-assignment.zap"
+						},
+						{
+							"match": "([a-zA-Z_]\\w*)\\s*}",
+							"captures": {
+								"1": { "name": "variable.other.zap" }
+							},
+							"name": "meta.array-assignment.zap"
+						}
+					]
+				},
+				{
+					"begin": "\\[",
+					"end": "\\]",
+					"name": "punctuation.section.brackets.zap",
+					"patterns": [
+						{ "include": "#numbers" },
+						{ "include": "#delimiters" },
+						{ "include": "#strIdentifiers" },
+						{
+							"match": "([a-zA-Z_]\\w*)",
+							"captures": {
+								"1": { "name": "variable.other.zap" }
+							}
+						}
+					]
+				},
+				{
+					"begin": "\\(",
+					"end": "\\)",
+					"name": "punctuation.section.parens.zap",
+					"patterns": [
+						{ "include": "#numbers" },
+						{ "include": "#delimiters" },
+						{ "include": "#strIdentifiers" }
+					]
+				}
+			]
+		},
+		"autoClosingPairs": {
+			"patterns": [
+				{ "include": "#brackets" },
+				{
+					"begin": "\"",
+					"end": "\"",
+					"name": "string.quoted.double.zap"
+				},
+				{
+					"begin": "'",
+					"end": "'",
+					"name": "string.quoted.single.zap"
+				}
+			]
+		},
+		"surroundingPairs": {
+			"patterns": [
+				{ "include": "#brackets" },
+				{
+					"begin": "\"",
+					"end": "\"",
+					"name": "string.quoted.double.zap"
+				},
+				{
+					"begin": "'",
+					"end": "'",
+					"name": "string.quoted.single.zap"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"match": "\\b(?:event|opt|type|funct)\\b",
+					"name": "keyword.control.zap"
+				}
+			]
+		},
+		"typeKeywords": {
+			"patterns": [
+				{
+					"match": "\\b(?:enum|map|struct)\\b",
+					"name": "keyword.control.zap"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f32|f64|boolean|string|buffer|unknown|Instance|Color3|Vector3|AlignedCFrame|CFrame)\\b",
+					"name": "storage.type.zap"
+				}
+			]
+		},
+		"setting": {
+			"patterns": [
+				{
+					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|PascalCase|camelCase|snake_case)\\b",
+					"name": "support.class.zap"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"match": "\\b(?::|true|false)\\b",
+					"name": "constant.language.boolean.zap"
+				}
+			]
+		},
+		"symbols": {
+			"patterns": [
+				{
+					"match": "[=:,]|\\.\\.+",
+					"name": "keyword.operator.zap"
+				}
+			]
+		},
+		"tokenizer": {
+			"patterns": [
+				{ "include": "#whitespace" },
+				{ "include": "#numbers" },
+				{ "include": "#delimiters" },
+				{ "include": "#strIdentifiers" },
+				{ "include": "#identifiersKeywords" }
+			]
+		},
+		"whitespace": {
+			"patterns": [
+				{
+					"match": "[ \\t\\r\\n]+",
+					"name": "text.whitespace.zap"
+				},
+				{
+					"begin": "--\\[([=]*)\\[",
+					"end": "$",
+					"captures": {
+						"1": { "name": "punctuation.definition.comment.zap" }
+					},
+					"name": "comment.block.documentation.zap"
+				},
+				{
+					"match": "--.*$",
+					"name": "comment.line.double-dash.zap"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"match": "\\d+?",
+					"name": "constant.numeric.zap"
+				}
+			]
+		},
+		"delimiters": {
+			"patterns": [
+				{
+					"match": "[{}()\\[\\]]",
+					"name": "punctuation.section.zap"
+				}
+			]
+		},
+		"strIdentifiers": {
+			"patterns": [
+				{
+					"match": "\"\\w+\"",
+					"name": "string.quoted.double.zap"
+				}
+			]
+		},
+		"identifiersKeywords": {
+			"patterns": [
+				{
+					"match": "([a-zA-Z_]\\w*):",
+					"captures": {
+						"1": { "name": "variable.other.readwrite.zap" }
+					}
+				},
+				{
+					"match": "\\b(?:event|opt|type|funct)\\b",
+					"name": "keyword.control.zap"
+				},
+				{
+					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|PascalCase|camelCase|snake_case)\\b",
+					"name": "variable.other.zap"
+				},
+				{
+					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f32|f64|boolean|string|buffer|unknown|Instance|Color3|Vector3|AlignedCFrame|CFrame)\\b",
+					"name": "storage.type.zap"
+				},
+				{
+					"match": "[=:,]|\\.\\.+",
+					"name": "keyword.operator.zap"
+				},
+				{
+					"match": "[a-zA-Z_]\\w*",
+					"name": "variable.other.zap"
+				}
+			]
+		}
+	}
+}

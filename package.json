@@ -1,0 +1,60 @@
+{
+	"name": "zap-vscode",
+	"displayName": "Zap Support",
+	"description": "Syntax highlighting & intellisense for the Zap IDL",
+	"version": "0.0.1",
+	"publisher": "Virtual",
+	"repository": "https://github.com/virtualbutfake/zap-vscode",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.73.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"zap",
+		"highlighting",
+		"syntax"
+	],
+	"activationEvents": [
+		"onLanguage:zap"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "zap",
+				"aliases": [
+					"Zap",
+					"zap"
+				],
+				"extensions": [
+					".zap"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "zap",
+				"scopeName": "source.zap",
+				"path": "./syntaxes/zap.tmLanguage.json"
+			}
+		]
+	},
+	"main": "./out/extension.js",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^16.18.34",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^6.7.0",
+		"@typescript-eslint/parser": "^6.7.0",
+		"eslint": "^8.26.0",
+		"typescript": "^5.3.2"
+	}
+}
