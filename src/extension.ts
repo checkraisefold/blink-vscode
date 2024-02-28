@@ -73,6 +73,20 @@ const WordToArray = {
 	async_lib: [],
 } as const;
 
+const autocompleteKeys = {
+	event: {
+		from: ['Server', 'Client'],
+		type: ['Reliable', 'Unreliable'],
+		call: ['SingleSync', 'SingleAsync', 'ManySync', 'ManyAsync'],
+		data: [],
+	},
+	funct: {
+		call: ['Async', 'Sync'],
+		args: [],
+		rets: [],
+	},
+};
+
 // Monaco function ports
 // This function will go through all words on this line, and return the closest word before the cursor position
 function getWordUntilPosition(document: vscode.TextDocument, position: vscode.Position) {
@@ -125,116 +139,216 @@ function getWordAtPosition(document: vscode.TextDocument, position: vscode.Posit
 	};
 }
 
+const tableTypeRegex = /(event|funct)\s*\w+\s*=\s*[{,;]\s*[A-Za-z]+\s*:?[^,}]*$/i;
+const isValueRegex = /([{,;])\s*([A-Za-z]+\s*):[^{,]*$/i;
+const isKeyRegex = /([{,;])\s*([A-Za-z]+\s*)$/i;
+
+function getTableType(slicedText: string[], regex: RegExp, startPosition: number) {
+	let variableType: string | null = null;
+	let currentPosition = startPosition;
+
+	while (currentPosition > 0) {
+		const text = slicedText
+			.join('\n')
+			.slice(0, currentPosition + 1)
+			.replace(/,$/, '');
+		const match = text.match(regex);
+
+		if (match) {
+			if ((match[1] == ',' || match[1] == ';') && match.index) {
+				currentPosition = match.index;
+				continue;
+			}
+
+			// encountered closing bracket
+			const varTypeMatch = text.match(tableTypeRegex);
+
+			if (varTypeMatch) {
+				variableType = varTypeMatch[1];
+			}
+		}
+
+		break;
+	}
+
+	return variableType;
+}
+
 export function activate(context: vscode.ExtensionContext) {
-	const provider = vscode.languages.registerCompletionItemProvider(
-		'zap',
-		{
-			provideCompletionItems: (document, position, token, context) => {
-				// Modified version of Editor.vue Monaco autocomplete
-				const word = getWordUntilPosition(document, position);
-				const range = new vscode.Range(
-					position.line,
-					word.startColumn,
-					position.line,
-					word.endColumn
-				);
+	context.subscriptions.push(
+		vscode.languages.registerCompletionItemProvider(
+			'zap',
+			{
+				provideCompletionItems: (document, position, token, context) => {
+					// Modified version of Editor.vue Monaco autocomplete
+					const word = getWordUntilPosition(document, position);
+					const range = new vscode.Range(
+						position.line,
+						word.startColumn,
+						position.line,
+						word.endColumn
+					);
 
-				if (range.start.character === 0) {
-					const suggestions = [
-						{
-							label: 'type',
-							kind: vscode.CompletionItemKind.Snippet,
-							insertText: new vscode.SnippetString('type ${1} = ${2}\n'),
-							documentation: 'Type Statement',
-							range: range,
-						},
-						{
-							label: 'opt',
-							kind: vscode.CompletionItemKind.Snippet,
-							insertText: new vscode.SnippetString('opt ${1} = ${2}\n'),
-							documentation: 'Settings',
-							range: range,
-						},
-						{
-							label: 'event',
-							kind: vscode.CompletionItemKind.Snippet,
-							insertText: new vscode.SnippetString(
-								[
-									'event ${1} = {',
-									'\tfrom: ${2},',
-									'\ttype: ${3},',
-									'\tcall: ${4},',
-									'\tdata: ${5}',
-									'}\n',
-								].join('\n')
-							),
-							documentation: 'Event',
-							range: range,
-						},
-						{
-							label: 'funct',
-							kind: vscode.CompletionItemKind.Snippet,
-							insertText: new vscode.SnippetString(
-								[
-									'funct ${1} = {',
-									'\tcall: ${2},',
-									'\targs: ${3},',
-									'\trets: ${4},',
-									'}\\n',
-								].join('\\n')
-							),
-							documentation: 'Event',
-							range: range,
-						},
-					];
-					return suggestions;
-				} else {
-					let i = -1;
-					let wordBefore = getWordAtPosition(document, position);
-					const keyIndex = wordBefore.text as keyof typeof WordToArray;
+					if (range.start.character === 0) {
+						const suggestions = [
+							{
+								label: 'type',
+								kind: vscode.CompletionItemKind.Snippet,
+								insertText: new vscode.SnippetString('type ${1} = ${2}\n'),
+								documentation: 'Type Statement',
+								range: range,
+							},
+							{
+								label: 'opt',
+								kind: vscode.CompletionItemKind.Snippet,
+								insertText: new vscode.SnippetString('opt ${1} = ${2}\n'),
+								documentation: 'Settings',
+								range: range,
+							},
+							{
+								label: 'event',
+								kind: vscode.CompletionItemKind.Snippet,
+								insertText: new vscode.SnippetString('event ${1}'),
+								documentation: 'Event',
+								range: range,
+							},
+							{
+								label: 'funct',
+								kind: vscode.CompletionItemKind.Snippet,
+								insertText: new vscode.SnippetString('funct ${1}'),
+								documentation: 'Event',
+								range: range,
+							},
+						];
+						return suggestions;
+					} else {
+						let i = -1;
+						let wordBefore = getWordAtPosition(document, position);
+						const keyIndex = wordBefore.text as keyof typeof WordToArray;
 
-					while (!wordBefore && word.startColumn + i > 0) {
-						wordBefore = getWordAtPosition(
-							document,
-							new vscode.Position(position.line, word.startColumn + i)
-						);
-						i--;
+						while (!wordBefore && word.startColumn + i > 0) {
+							wordBefore = getWordAtPosition(
+								document,
+								new vscode.Position(position.line, word.startColumn + i)
+							);
+							i--;
+						}
+
+						const arr = !wordBefore
+							? Object.keys(EventParamToArray)
+							: WordToArray[keyIndex] ?? types;
+
+						const identifiers = arr.map((k) => {
+							return new vscode.CompletionItem(k, vscode.CompletionItemKind.Variable);
+						});
+
+						if (wordBefore && !WordToArray[keyIndex]) {
+							identifiers.push(
+								new vscode.CompletionItem('enum', vscode.CompletionItemKind.Variable),
+								new vscode.CompletionItem('map', vscode.CompletionItemKind.Snippet),
+								new vscode.CompletionItem('struct', vscode.CompletionItemKind.Snippet)
+							);
+						}
+
+						return identifiers;
 					}
+				},
+			},
+			'.'
+		),
+		vscode.languages.registerCompletionItemProvider(
+			'zap',
+			{
+				provideCompletionItems: (document, position, token, context) => {
+					const slicedText = document
+						.getText()
+						.split('\n')
+						.slice(0, position.line + 1);
 
-					const arr = !wordBefore
-						? Object.keys(EventParamToArray)
-						: WordToArray[keyIndex] ?? types;
-
-					const identifiers = arr.map((k) => {
-						return new vscode.CompletionItem(
-							k,
-							vscode.CompletionItemKind.Variable
-						);
+					let totalTextSize = 0;
+					slicedText.forEach((line) => {
+						totalTextSize += line.length;
 					});
 
-					if (wordBefore && !WordToArray[keyIndex]) {
-						identifiers.push(
-							new vscode.CompletionItem(
-								'enum',
-								vscode.CompletionItemKind.Variable
-							),
-							new vscode.CompletionItem(
-								'map',
-								vscode.CompletionItemKind.Snippet
-							),
-							new vscode.CompletionItem(
-								'struct',
-								vscode.CompletionItemKind.Snippet
-							)
-						);
+					let currentPosition =
+						totalTextSize - (slicedText[position.line].length - position.character) + 2;
+
+					slicedText[position.line] = slicedText[position.line].slice(
+						0,
+						position.character
+					);
+
+					if (
+						slicedText[position.line].substring(
+							position.character - 1,
+							position.character
+						) == ',' // prevent cases like "from: Client," triggering autocomplete
+					) {
+						currentPosition = 0;
 					}
 
-					return identifiers;
-				}
-			},
-		},
-		'.'
-	);
+					const key = slicedText.join('\n').match(isValueRegex)?.[2] ?? null;
+					let variableType = getTableType(slicedText, isValueRegex, currentPosition);
 
-	context.subscriptions.push(provider);
+					if (!key || !variableType) {
+						const isWritingTableKey = slicedText.join('\n').match(isKeyRegex);
+
+						if (isWritingTableKey) {
+							if (isWritingTableKey[1] == '{') {
+								variableType =
+									slicedText
+										.join('\n')
+										.slice(0, currentPosition)
+										.match(tableTypeRegex)?.[1] ?? null;
+							} else {
+								variableType = getTableType(
+									slicedText,
+									isValueRegex,
+									isWritingTableKey.index ?? 0
+								);
+							}
+						}
+
+						if (!variableType) return [];
+
+						const fieldCompletions: vscode.CompletionItem[] = Object.keys(
+							autocompleteKeys[variableType as keyof typeof autocompleteKeys]
+						).map((k) => {
+							return {
+								label: k,
+								kind: vscode.CompletionItemKind.Snippet,
+								insertText: new vscode.SnippetString(`${k}: $1`),
+								command: {
+									command: 'editor.action.triggerSuggest',
+									title: 'refresh completion',
+								},
+							};
+						});
+
+						return fieldCompletions;
+					}
+
+					const availableOptions =
+						autocompleteKeys[variableType as keyof typeof autocompleteKeys][
+							key as keyof typeof autocompleteKeys.funct &
+								keyof typeof autocompleteKeys.event
+						];
+
+					if (!availableOptions) {
+						return [];
+					}
+
+					const typeCompletions = availableOptions.map((k) => {
+						return new vscode.CompletionItem(k, vscode.CompletionItemKind.Variable);
+					});
+
+					return typeCompletions;
+				},
+			},
+			':',
+			',',
+			' ',
+			';'
+		)
+	);
 }
