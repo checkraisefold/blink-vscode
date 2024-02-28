@@ -6,4 +6,5 @@ This extension attempts to mimic the highlighting and intellisense seen inside o
 
 Support for other editors is not planned.
 
+[Changelog](CHANGELOG.md)
 [Extension Link](https://marketplace.visualstudio.com/items?itemName=Virtual.zap-vscode)
