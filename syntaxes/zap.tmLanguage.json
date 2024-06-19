@@ -155,7 +155,7 @@
 		"setting": {
 			"patterns": [
 				{
-					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|PascalCase|camelCase|snake_case)\\b",
+					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|Sync|Async|PascalCase|camelCase|snake_case)\\b",
 					"name": "support.class.zap"
 				}
 			]
@@ -242,7 +242,7 @@
 					"name": "keyword.control.zap"
 				},
 				{
-					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|PascalCase|camelCase|snake_case)\\b",
+					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|Sync|Async|PascalCase|camelCase|snake_case)\\b",
 					"name": "variable.other.zap"
 				},
 				{
