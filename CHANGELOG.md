@@ -1,3 +1,7 @@
+# 0.1.1
+- Add `funct` keyword
+- Add `Sync` and `Async` syntax highlighting ([#1](https://github.com/VirtualButFake/zap-vscode/pull/1) by [Aulkhami](https://github.com/Aulkhami))
+
 # 0.1.0
 - Provides further intelllisense (fields, enum values)
 - Fixes some highlighting issues
