@@ -2,7 +2,7 @@
 	"name": "zap-vscode",
 	"displayName": "Zap Support",
 	"description": "Syntax highlighting & intellisense for the Zap IDL",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"publisher": "Virtual",
 	"repository": "https://github.com/virtualbutfake/zap-vscode",
 	"license": "MIT",
