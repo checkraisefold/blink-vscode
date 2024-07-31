@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 // Taken directly from Editor.vue inside Zap's docs
-const Keywords = ['event', 'opt', 'type'] as const;
+const Keywords = ['event', 'opt', 'type', 'funct'] as const;
 
 const TypeKeywords = ['enum', 'struct', 'map'] as const;
 
