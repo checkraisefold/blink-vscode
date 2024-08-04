@@ -4,8 +4,8 @@
 
 A simple extension that provides intellisense and highlighting for the [Zap](https://github.com/red-blox/zap/tree/main) IDL.
 
-[![CI](https://github.com/virtualbutfake/zap-vscode/actions/workflows/ci.yaml/badge.svg)](https://github.com/virtualbutfake/zap-vscode/actions)
 [![License](https://img.shields.io/github/license/virtualbutfake/zap-vscode)](https://github.com/VirtualButFake/zap-vscode/blob/master/LICENSE.md)
+[![CI](https://github.com/virtualbutfake/zap-vscode/actions/workflows/ci.yaml/badge.svg)](https://github.com/virtualbutfake/zap-vscode/actions)
 [![Version](https://img.shields.io/visual-studio-marketplace/v/Virtual.zap-vscode)](https://marketplace.visualstudio.com/items?itemName=Virtual.zap-vscode)
 [![Installs](https://img.shields.io/visual-studio-marketplace/d/Virtual.zap-vscode)](https://marketplace.visualstudio.com/items?itemName=Virtual.zap-vscode)
 
