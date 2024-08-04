@@ -258,7 +258,7 @@ export function activate(context: vscode.ExtensionContext) {
 
                         const arr = !wordBefore
                             ? Object.keys(EventParamToArray)
-                            : WordToArray[keyIndex] ?? types;
+                            : (WordToArray[keyIndex] ?? types);
 
                         const identifiers = arr.map((k) => {
                             return new vscode.CompletionItem(
