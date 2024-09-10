@@ -1,35 +1,32 @@
 {
-    "name": "zap-vscode",
-    "displayName": "Zap Support",
-    "description": "Syntax highlighting & intellisense for the Zap IDL",
+    "name": "blink-vscode",
+    "displayName": "Blink",
+    "description": "Syntax highlighting & intellisense for the Blink IDL.",
     "version": "1.0.0",
-    "publisher": "Virtual",
-    "repository": "https://github.com/virtualbutfake/zap-vscode",
+    "publisher": "checkraisefold",
+    "repository": "https://github.com/checkraisefold/blink-vscode",
     "license": "MIT",
     "engines": {
-        "vscode": "^1.91.1"
+        "vscode": "^1.93.0"
     },
     "categories": [
         "Programming Languages"
     ],
     "keywords": [
-        "zap",
+        "blink",
         "highlighting",
         "syntax"
-    ],
-    "activationEvents": [
-        "onLanguage:zap"
     ],
     "contributes": {
         "languages": [
             {
-                "id": "zap",
+                "id": "blink",
                 "aliases": [
-                    "Zap",
-                    "zap"
+                    "Blink",
+                    "blink"
                 ],
                 "extensions": [
-                    ".zap"
+                    ".blink"
                 ],
                 "configuration": "./language-configuration.json",
                 "icon": {
@@ -40,9 +37,9 @@
         ],
         "grammars": [
             {
-                "language": "zap",
-                "scopeName": "source.zap",
-                "path": "./syntaxes/zap.tmLanguage.json"
+                "language": "blink",
+                "scopeName": "source.blink",
+                "path": "./syntaxes/blink.tmLanguage.json"
             }
         ]
     },
@@ -52,17 +49,20 @@
         "compile": "tsc -p ./",
         "lint": "eslint \"src/**/*.ts\"",
         "watch": "tsc -watch -p ./",
+        "grammar:test": "vscode-tmgrammar-test tests/**/*.blink",
+        "grammar:snap": "vscode-tmgrammar-snap tests/**/*.blink",
+        "grammar:snap-update": "vscode-tmgrammar-snap -u tests/**/*.blink",
         "ci:eslint": "eslint ./src --max-warnings=0 --ext .ts && tsc --noEmit",
         "ci:prettier": "prettier --check ./src",
         "ci:tsc": "tsc --noEmit"
     },
     "devDependencies": {
-        "@types/node": "^16.18.34",
-        "@types/vscode": "^1.91.0",
-        "@typescript-eslint/eslint-plugin": "^6.7.0",
-        "@typescript-eslint/parser": "^6.7.0",
-        "eslint": "^8.26.0",
+        "@types/node": "^22.5.4",
+        "@types/vscode": "^1.93.0",
+        "eslint": "^9.10.0",
         "prettier": "^3.3.3",
-        "typescript": "^5.3.2"
+        "typescript": "^5.6.2",
+        "typescript-eslint": "^8.5.0",
+        "vscode-tmgrammar-test": "^0.1.3"
     }
 }

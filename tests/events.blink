@@ -1,0 +1,26 @@
+-- SYNTAX TEST "source.blink" "events"
+
+event Example {
+	From: Server,
+	Type: Reliable,
+	Call: SingleSync,
+	Data: (u8, u16, Instance, Instance, u8)
+}
+
+function Example {
+	Yield: Coroutine,
+	Data: u8,
+	Return: u8
+}
+
+function ExampleFuture {
+	Yield: Future,
+	Data: u8,
+	Return: u8
+}
+
+function ExamplePromise {
+	Yield: Promise,
+	Data: u8,
+	Return: u8
+}

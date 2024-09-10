@@ -1,0 +1,17 @@
+-- SYNTAX TEST "source.blink" "scopes"
+
+scope ExampleScope {
+    type InScopeType = u8
+    event InScopeEvent {
+        From: Server,
+        Type: Reliable,
+        Call: SingleSync,
+        Data: u8
+    }
+	import "attributes.blink" as Something
+}
+ 
+struct Example {
+    Reference = ExampleScope.InScopeType
+}
+type a = ExampleScope.Something.VectorInt16

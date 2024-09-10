@@ -1,7 +1,7 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Zap",
-	"scopeName": "source.zap",
+	"name": "Blink",
+	"scopeName": "source.blink",
 	"patterns": [
 		{ "include": "#comments" },
 		{ "include": "#brackets" },
@@ -23,14 +23,14 @@
 					"begin": "--\\[([=]*)\\[",
 					"end": "\\]([=]*)\\]",
 					"captures": {
-						"0": { "name": "comment.block.documentation.zap" },
-						"1": { "name": "comment.block.documentation.zap" }
+						"0": { "name": "comment.block.documentation.blink" },
+						"1": { "name": "comment.block.documentation.blink" }
 					},
-					"name": "comment.block.documentation.zap"
+					"name": "comment.block.documentation.blink"
 				},
 				{
 					"match": "--.*$",
-					"name": "comment.line.double-dash.zap"
+					"name": "comment.line.double-dash.blink"
 				}
 			]
 		},
@@ -39,7 +39,7 @@
 				{
 					"begin": "\\{",
 					"end": "\\}",
-					"name": "punctuation.section.braces.zap",
+					"name": "punctuation.section.braces.blink",
 					"patterns": [
 						{ "include": "#types" },
 						{ "include": "#typeKeywords" },
@@ -50,30 +50,30 @@
 						{
 							"match": "([a-zA-Z_]\\w*):",
 							"captures": {
-								"1": { "name": "variable.other.zap" }
+								"1": { "name": "variable.other.blink" }
 							}
 						},
 						{
 							"match": "([a-zA-Z_]\\w*)\\s*,",
 							"captures": {
-								"1": { "name": "variable.other.zap" },
-								"2": { "name": "variable.other.zap" }
+								"1": { "name": "variable.other.blink" },
+								"2": { "name": "variable.other.blink" }
 							},
-							"name": "meta.array-assignment.zap"
+							"name": "meta.array-assignment.blink"
 						},
 						{
 							"match": "([a-zA-Z_]\\w*)\\s*}",
 							"captures": {
-								"1": { "name": "variable.other.zap" }
+								"1": { "name": "variable.other.blink" }
 							},
-							"name": "meta.array-assignment.zap"
+							"name": "meta.array-assignment.blink"
 						}
 					]
 				},
 				{
 					"begin": "\\[",
 					"end": "\\]",
-					"name": "punctuation.section.brackets.zap",
+					"name": "punctuation.section.brackets.blink",
 					"patterns": [
 						{ "include": "#numbers" },
 						{ "include": "#delimiters" },
@@ -81,7 +81,7 @@
 						{
 							"match": "([a-zA-Z_]\\w*)",
 							"captures": {
-								"1": { "name": "variable.other.zap" }
+								"1": { "name": "variable.other.blink" }
 							}
 						}
 					]
@@ -89,11 +89,27 @@
 				{
 					"begin": "\\(",
 					"end": "\\)",
-					"name": "punctuation.section.parens.zap",
+					"name": "punctuation.section.parens.blink",
 					"patterns": [
 						{ "include": "#numbers" },
 						{ "include": "#delimiters" },
 						{ "include": "#strIdentifiers" }
+					]
+				},
+				{
+					"begin": "<",
+					"end": ">",
+					"name": "punctuation.section.chevrons.blink",
+					"patterns": [
+						{ "include": "#numbers" },
+						{ "include": "#delimiters" },
+						{ "include": "#strIdentifiers" },
+						{
+							"match": "([a-zA-Z_]\\w*)\\s*,?",
+							"captures": {
+								"1": { "name": "storage.type.blink" }
+							}
+						}
 					]
 				}
 			]
@@ -104,12 +120,12 @@
 				{
 					"begin": "\"",
 					"end": "\"",
-					"name": "string.quoted.double.zap"
+					"name": "string.quoted.double.blink"
 				},
 				{
 					"begin": "'",
 					"end": "'",
-					"name": "string.quoted.single.zap"
+					"name": "string.quoted.single.blink"
 				}
 			]
 		},
@@ -119,44 +135,44 @@
 				{
 					"begin": "\"",
 					"end": "\"",
-					"name": "string.quoted.double.zap"
+					"name": "string.quoted.double.blink"
 				},
 				{
 					"begin": "'",
 					"end": "'",
-					"name": "string.quoted.single.zap"
+					"name": "string.quoted.single.blink"
 				}
 			]
 		},
 		"keywords": {
 			"patterns": [
 				{
-					"match": "\\b(?:event|opt|type|funct)\\b",
-					"name": "keyword.control.zap"
+					"match": "\\b(?:event|option|type|function)\\b",
+					"name": "keyword.control.blink"
 				}
 			]
 		},
 		"typeKeywords": {
 			"patterns": [
 				{
-					"match": "\\b(?:enum|map|struct)\\b",
-					"name": "keyword.control.zap"
+					"match": "\\b(?:enum|map|struct|set)\\b",
+					"name": "keyword.control.blink"
 				}
 			]
 		},
 		"types": {
 			"patterns": [
 				{
-					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f32|f64|boolean|string|buffer|unknown|Instance|Color3|Vector3|AlignedCFrame|CFrame)\\b",
-					"name": "storage.type.zap"
+					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f32|f64|boolean|string|buffer|unknown|Instance|Color3|vector|CFrame)\\b",
+					"name": "storage.type.blink"
 				}
 			]
 		},
 		"setting": {
 			"patterns": [
 				{
-					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|Sync|Async|PascalCase|camelCase|snake_case)\\b",
-					"name": "support.class.zap"
+					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|Coroutine|Future|Promise|Pascal|Camel|Snake)\\b",
+					"name": "variable.other.enummember"
 				}
 			]
 		},
@@ -164,15 +180,23 @@
 			"patterns": [
 				{
 					"match": "\\b(?::|true|false)\\b",
-					"name": "constant.language.boolean.zap"
+					"name": "constant.language.boolean.blink"
 				}
 			]
 		},
 		"symbols": {
 			"patterns": [
 				{
-					"match": "[=:,]|\\.\\.+",
-					"name": "keyword.operator.zap"
+					"match": "[=:]|\\.\\.+",
+					"name": "keyword.operator.blink"
+				},
+				{
+					"match": "\\?",
+					"name": "keyword.operator.optional.blink"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.comma.blink"
 				}
 			]
 		},
@@ -189,19 +213,19 @@
 			"patterns": [
 				{
 					"match": "[ \\t\\r\\n]+",
-					"name": "text.whitespace.zap"
+					"name": "text.whitespace.blink"
 				},
 				{
 					"begin": "--\\[([=]*)\\[",
 					"end": "$",
 					"captures": {
-						"1": { "name": "punctuation.definition.comment.zap" }
+						"1": { "name": "punctuation.definition.comment.blink" }
 					},
-					"name": "comment.block.documentation.zap"
+					"name": "comment.block.documentation.blink"
 				},
 				{
 					"match": "--.*$",
-					"name": "comment.line.double-dash.zap"
+					"name": "comment.line.double-dash.blink"
 				}
 			]
 		},
@@ -209,7 +233,7 @@
 			"patterns": [
 				{
 					"match": "\\d+?",
-					"name": "constant.numeric.zap"
+					"name": "constant.numeric.blink"
 				}
 			]
 		},
@@ -217,7 +241,7 @@
 			"patterns": [
 				{
 					"match": "[{}()\\[\\]]",
-					"name": "punctuation.section.zap"
+					"name": "punctuation.section.blink"
 				}
 			]
 		},
@@ -225,37 +249,27 @@
 			"patterns": [
 				{
 					"match": "\"\\w+\"",
-					"name": "string.quoted.double.zap"
+					"name": "string.quoted.double.blink"
 				}
 			]
 		},
 		"identifiersKeywords": {
 			"patterns": [
+				{ "include": "#symbols" },
+				{ "include": "#types" },
 				{
 					"match": "([a-zA-Z_]\\w*):",
 					"captures": {
-						"1": { "name": "variable.other.readwrite.zap" }
+						"1": { "name": "variable.other.readwrite.blink" }
 					}
 				},
 				{
-					"match": "\\b(?:event|opt|type|funct)\\b",
-					"name": "keyword.control.zap"
-				},
-				{
-					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|Sync|Async|PascalCase|camelCase|snake_case)\\b",
-					"name": "variable.other.zap"
-				},
-				{
-					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f32|f64|boolean|string|buffer|unknown|Instance|Color3|Vector3|AlignedCFrame|CFrame)\\b",
-					"name": "storage.type.zap"
-				},
-				{
-					"match": "[=:,]|\\.\\.+",
-					"name": "keyword.operator.zap"
+					"match": "\\b(?:event|option|type|function)\\b",
+					"name": "keyword.control.blink"
 				},
 				{
 					"match": "[a-zA-Z_]\\w*",
-					"name": "variable.other.zap"
+					"name": "variable.other.blink"
 				}
 			]
 		}

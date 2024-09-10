@@ -1,0 +1,13 @@
+-- SYNTAX TEST "source.blink" "attributes"
+
+type Simple = u8
+type Optional = u8?
+type Array = u8[1]
+type Range = u8[0..100]
+type VectorInt16 = vector<i16>
+type Orientation = CFrame<i16, f16>
+map Players = {[u8]: Instance(Player)}[0..255]
+enum States = (A, B, C, D)[0..255]
+struct Dictionary {
+    Field: u8
+}[0..255]

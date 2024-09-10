@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 
-// Taken directly from Editor.vue inside Zap's docs
 const Operators = ['true', 'false'] as const;
 
 const Locations = ['Server', 'Client'] as const;
@@ -10,20 +9,21 @@ const Brand = ['Reliable', 'Unreliable'] as const;
 const Calls = ['SingleSync', 'SingleAsync', 'ManySync', 'ManyAsync'] as const;
 
 const Options = [
-    'typescript',
-    'write_checks',
-    'casing',
-    'server_output',
-    'client_output',
-    'manual_event_loop',
-    'yield_type',
-    'async_lib',
+    'Typescript',
+    'WriteValidations',
+    'Casing',
+    'ServerOutput',
+    'ClientOutput',
+    'TypesOutput',
+    'ManualReplication',
+    'UsePolling',
+    'FutureLibrary',
+    'PromiseLibrary',
 ] as const;
 
-const Casing = ['PascalCase', 'camelCase', 'snake_case'].map(
+const Casing = ['Pascal', 'Camel', 'Snake'].map(
     (value) => `"${value}"`
 );
-const YieldType = ['yield', 'future', 'promise'].map((value) => `"${value}"`);
 
 const types = [
     'u8',
@@ -40,46 +40,46 @@ const types = [
     'unknown',
     'Instance',
     'Color3',
-    'Vector3',
-    'AlignedCFrame',
+    'vector',
     'CFrame',
 ] as const;
 
 const EventParamToArray = {
-    from: Locations,
-    type: Brand,
-    call: Calls,
-    data: [],
+    From: Locations,
+    Type: Brand,
+    Call: Calls,
+    Data: [],
 } as const;
 
 const WordToArray = {
     ...EventParamToArray,
 
-    opt: Options,
+    option: Options,
 
-    casing: Casing,
-    yield_type: YieldType,
+    Casing: Casing,
 
-    typescript: Operators,
-    write_checks: Operators,
-    manual_event_loop: Operators,
+    Typescript: Operators,
+    WriteValidations: Operators,
+    ManualReplication: Operators,
+    UsePolling: Operators,
 
-    output_server: [],
-    output_client: [],
-    async_lib: [],
+    ServerOutput: [],
+    ClientOutput: [],
+    FutureLibrary: [],
+    PromiseLibrary: [],
 } as const;
 
 const autocompleteKeys = {
     event: {
-        from: ['Server', 'Client'],
-        type: ['Reliable', 'Unreliable'],
-        call: ['SingleSync', 'SingleAsync', 'ManySync', 'ManyAsync'],
-        data: [],
+        From: ['Server', 'Client'],
+        Type: ['Reliable', 'Unreliable'],
+        Call: ['SingleSync', 'SingleAsync', 'ManySync', 'ManyAsync'],
+        Data: [],
     },
-    funct: {
-        call: ['Async', 'Sync'],
-        args: [],
-        rets: [],
+    function: {
+        Yield: ['Coroutine', 'Future', 'Promise'],
+        Data: [],
+        Return: [],
     },
 };
 
@@ -145,7 +145,7 @@ function getWordAtPosition(
 }
 
 const tableTypeRegex =
-    /(event|funct)\s*\w+\s*=\s*[{,;]\s*[A-Za-z]+\s*:?[^,}]*$/i;
+    /(event|function)\s*\w+\s*=\s*[{,;]\s*[A-Za-z]+\s*:?[^,}]*$/i;
 const isValueRegex = /([{,;])\s*([A-Za-z]+\s*):[^{,]*$/i;
 const isKeyRegex = /([{,;])\s*([A-Za-z]+\s*)$/i;
 
@@ -211,10 +211,10 @@ export function activate(context: vscode.ExtensionContext) {
                                 range: range,
                             },
                             {
-                                label: 'opt',
+                                label: 'option',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    'opt ${1} = ${2}\n'
+                                    'option ${1} = ${2}\n'
                                 ),
                                 documentation: 'Settings',
                                 range: range,
@@ -229,10 +229,10 @@ export function activate(context: vscode.ExtensionContext) {
                                 range: range,
                             },
                             {
-                                label: 'funct',
+                                label: 'function',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    'funct ${1}'
+                                    'function ${1}'
                                 ),
                                 documentation: 'Event',
                                 range: range,
@@ -280,7 +280,11 @@ export function activate(context: vscode.ExtensionContext) {
                                 new vscode.CompletionItem(
                                     'struct',
                                     vscode.CompletionItemKind.Snippet
-                                )
+                                ),
+                                new vscode.CompletionItem(
+                                    'set',
+                                    vscode.CompletionItemKind.Variable
+                                ),
                             );
                         }
 
@@ -291,7 +295,7 @@ export function activate(context: vscode.ExtensionContext) {
             '.'
         ),
         vscode.languages.registerCompletionItemProvider(
-            'zap',
+            'blink',
             {
                 provideCompletionItems: (document, position) => {
                     const slicedText = document
@@ -381,7 +385,7 @@ export function activate(context: vscode.ExtensionContext) {
                         autocompleteKeys[
                             variableType as keyof typeof autocompleteKeys
                         ][
-                            key as keyof typeof autocompleteKeys.funct &
+                            key as keyof typeof autocompleteKeys.function &
                                 keyof typeof autocompleteKeys.event
                         ];
 
