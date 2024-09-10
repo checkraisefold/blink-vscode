@@ -6,20 +6,22 @@ A simple extension that provides intellisense and highlighting for the [Blink](h
 
 [![License](https://img.shields.io/github/license/checkraisefold/blink-vscode)](https://github.com/checkraisefold/blink-vscode/blob/master/LICENSE.md)
 [![CI](https://github.com/checkraisefold/blink-vscode/actions/workflows/ci.yaml/badge.svg)](https://github.com/checkraisefold/blink-vscode/actions)
-[![Version](https://img.shields.io/visual-studio-marketplace/v/Virtual.blink-vscode)](https://marketplace.visualstudio.com/items?itemName=Virtual.blink-vscode)
-[![Installs](https://img.shields.io/visual-studio-marketplace/d/Virtual.blink-vscode)](https://marketplace.visualstudio.com/items?itemName=Virtual.blink-vscode)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/checkraisefold.blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
+[![Installs](https://img.shields.io/visual-studio-marketplace/d/checkraisefold.blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
+[![Version (OpenVSX)](https://img.shields.io/open-vsx/v/checkraisefold/blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
+[![Installs (OpenVSX)](https://img.shields.io/open-vsx/dt/checkraisefold/blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
 
 </div>
 
 ## Features
 
-This extension provides syntax highlighting and intellisense for the Zap IDL. It is based on the Zap playground, and is designed to be as close to the playground as possible.
+This extension provides syntax highlighting and intellisense for the Blink IDL. It is based on zap-vscode, which is primarily based on the Zap playground.
 
 Support for other editors is not planned.
 
 ## Getting Started
 
-blink-vscode does not require any configuration. Simply install the extension [here](https://marketplace.visualstudio.com/items?itemName=Virtual.zap-vscode) and start writing Zap code.
+blink-vscode does not require any configuration. Simply install the extension [here](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode), or [here if you use VSCodium](https://open-vsx.org/extension/checkraisefold/blink-vscode), and start writing Blink code.
 
 ## Credits
 
