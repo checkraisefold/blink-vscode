@@ -21,9 +21,7 @@ const Options = [
     'PromiseLibrary',
 ] as const;
 
-const Casing = ['Pascal', 'Camel', 'Snake'].map(
-    (value) => `"${value}"`
-);
+const Casing = ['Pascal', 'Camel', 'Snake'].map((value) => `"${value}"`);
 
 const types = [
     'u8',
@@ -284,7 +282,7 @@ export function activate(context: vscode.ExtensionContext) {
                                 new vscode.CompletionItem(
                                     'set',
                                     vscode.CompletionItemKind.Variable
-                                ),
+                                )
                             );
                         }
 
