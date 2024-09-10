@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright © `2024` `VirtualButFake (Tijn Epema)`
+Copyright © `2024` `VirtualButFake (Tijn Epema)`\
 Copyright © `2024` `checkraisefold`
 
 Permission is hereby granted, free of charge, to any person

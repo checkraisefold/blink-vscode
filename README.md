@@ -27,7 +27,7 @@ blink-vscode does not require any configuration. Simply install the extension [h
 
 ## Credits
 
-[Zap](https://github.com/red-blox/zap) - A significant portion of the code comes from [this](https://github.com/red-blox/zap/blob/main/docs/.vitepress/components/Editor.vue) file.
+[Zap](https://github.com/red-blox/zap) - A significant portion of the code comes from [this](https://github.com/red-blox/zap/blob/main/docs/.vitepress/components/Editor.vue) file.\
 [zap-vscode](https://github.com/VirtualButFake/zap-vscode) - Almost the entire TextMate grammar and TypeScript code, aside from modifications, came from this project.
 
 ## Contributing
