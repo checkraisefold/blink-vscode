@@ -1,4 +1,9 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.3
+
+- Fixed commas in snippets.
+- Shifted around snippet choices to reflect most commonly used ones.
+
 # 0.1.2
 
 - Fixed spacing in snippets.

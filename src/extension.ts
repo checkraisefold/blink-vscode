@@ -74,16 +74,16 @@ const autocompleteKeys = {
 
 const eventSnippet = [
     'event ${1:EventName} {',
-    `\tFrom: \${2|${Locations.join()}|}`,
-    `\tType: \${3|${Brand.join()}|}`,
-    `\tCall: \${4|${Calls.join()}|}`,
-    `\tPoll: \${5|${Operators.join()}|}`,
+    `\tFrom: \${2|${Locations.join()}|},`,
+    `\tType: \${3|${Brand.join()}|},`,
+    `\tCall: \${4|${Calls.join()}|},`,
+    `\tPoll: \${5|${Operators.join()}|},`,
     '\tData: $0\n}',
 ].join('\n');
 const functionSnippet = [
     'function ${1:FuncName} {',
-    `\tYield: \${2|${YieldTypes.join()}|}`,
-    `\tReturn: $3`,
+    `\tYield: \${2|${YieldTypes.join()}|},`,
+    `\tReturn: $3,`,
     '\tData: $0\n}',
 ].join('\n');
 
