@@ -2,12 +2,18 @@ import typescriptEslint from 'typescript-eslint';
 import eslint from '@eslint/js';
 
 export default typescriptEslint.config(
+    {
+        ignores: ['**/node_modules/*', '**/out/*']
+    },
     eslint.configs.recommended,
     ...typescriptEslint.configs.recommendedTypeChecked,
     {
         languageOptions: {
             parserOptions: {
-                projectService: true,
+                projectService: {
+                    allowDefaultProject: ['*.mjs'],
+                    defaultProject: "tsconfig.mjs.json"
+                },
                 tsconfigRootDir: import.meta.dirname,
             },
         },

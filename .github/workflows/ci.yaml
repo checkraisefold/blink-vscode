@@ -17,36 +17,36 @@ jobs:
     name: ESLint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '22'
     - name: Install
-      run: npm install
+      run: npm ci
     - name: ESLint
       run: npm run ci:eslint
   prettier:
     name: Prettier
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '22'
     - name: Install
-      run: npm install
+      run: npm ci
     - name: Prettier
       run: npm run ci:prettier
   typescript:
     name: TypeScript Compiler Check
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '22'
     - name: Install
-      run: npm install
+      run: npm ci
     - name: TypeScript
       run: npm run ci:tsc     
     

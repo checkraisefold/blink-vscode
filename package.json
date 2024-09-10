@@ -43,16 +43,16 @@
             }
         ]
     },
-    "main": "./out/extension.js",
+    "main": "./out/src/extension.js",
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
-        "lint": "eslint \"src/**/*.ts\"",
+        "lint": "eslint",
         "watch": "tsc -watch -p ./",
         "grammar:test": "vscode-tmgrammar-test tests/**/*.blink",
         "grammar:snap": "vscode-tmgrammar-snap tests/**/*.blink",
         "grammar:snap-update": "vscode-tmgrammar-snap -u tests/**/*.blink",
-        "ci:eslint": "eslint ./src --max-warnings=0 --ext .ts && tsc --noEmit",
+        "ci:eslint": "eslint --max-warnings=0 && tsc --noEmit",
         "ci:prettier": "prettier --check ./src",
         "ci:tsc": "tsc --noEmit"
     },
