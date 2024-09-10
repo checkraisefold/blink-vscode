@@ -1,4 +1,8 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.2
+
+- Fixed spacing in snippets.
+
 # 0.1.1
 
 - Added highlighting for types in map keys.

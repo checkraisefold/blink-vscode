@@ -1,19 +1,11 @@
 import * as vscode from 'vscode';
 
-const Operators = ['true', 'false'] as const;
-const OperatorsJoined = Operators.join();
-
+const Operators = ['false', 'true'] as const;
 const Locations = ['Server', 'Client'] as const;
-const LocationsJoined = Locations.join();
-
 const Brand = ['Reliable', 'Unreliable'] as const;
-const BrandsJoined = Brand.join();
-
 const YieldTypes = ['Coroutine', 'Future', 'Promise'] as const;
-const YieldTypesJoined = Brand.join();
-
 const Calls = ['SingleSync', 'SingleAsync', 'ManySync', 'ManyAsync'] as const;
-const CallsJoined = Calls.join();
+const Casing = ['Pascal', 'Camel', 'Snake'].map((value) => `"${value}"`);
 
 const Options = [
     'Typescript',
@@ -28,8 +20,6 @@ const Options = [
     'PromiseLibrary',
 ] as const;
 const OptionsJoined = Options.join();
-
-const Casing = ['Pascal', 'Camel', 'Snake'].map((value) => `"${value}"`);
 
 const types = [
     'u8',
@@ -81,6 +71,21 @@ const autocompleteKeys = {
         Return: [],
     },
 };
+
+const eventSnippet = [
+    'event ${1:EventName} {',
+    `\tFrom: \${2|${Locations.join()}|}`,
+    `\tType: \${3|${Brand.join()}|}`,
+    `\tCall: \${4|${Calls.join()}|}`,
+    `\tPoll: \${5|${Operators.join()}|}`,
+    '\tData: $0\n}',
+].join('\n');
+const functionSnippet = [
+    'function ${1:FuncName} {',
+    `\tYield: \${2|${YieldTypes.join()}|}`,
+    `\tReturn: $3`,
+    '\tData: $0\n}',
+].join('\n');
 
 // Monaco function ports
 // This function will go through all words on this line, and return the closest word before the cursor position
@@ -212,13 +217,7 @@ export function activate(context: vscode.ExtensionContext) {
                                 label: 'event',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    `event \${1:EventName} {
-                                    \tFrom: \${2|${LocationsJoined}|},
-                                    \tType: \${3|${BrandsJoined}|},
-                                    \tCall: \${4|${CallsJoined}|},
-                                    \tPoll: \${4|${OperatorsJoined}|},
-                                    \tData: $0
-                                    }`
+                                    eventSnippet
                                 ),
                                 documentation: 'Event',
                                 range: range,
@@ -227,11 +226,7 @@ export function activate(context: vscode.ExtensionContext) {
                                 label: 'function',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    `function \${1:FuncName} {
-                                    \tYield: \${2|${YieldTypesJoined}|},
-                                    \tReturn: $3,
-                                    \tData: $0
-                                    }`
+                                    functionSnippet
                                 ),
                                 documentation: 'Function',
                                 range: range,
