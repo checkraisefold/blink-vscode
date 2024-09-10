@@ -6,7 +6,7 @@ on:
 env:
   CI: true
 
-name: Release/Deploy
+name: Release & Deploy
 jobs:
   release:
     runs-on: ubuntu-latest

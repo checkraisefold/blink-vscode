@@ -45,7 +45,7 @@
             }
         ]
     },
-    "main": "./out/src/extension.js",
+    "main": "./out/extension.js",
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
