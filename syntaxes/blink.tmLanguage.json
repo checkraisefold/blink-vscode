@@ -147,7 +147,7 @@
 		"keywords": {
 			"patterns": [
 				{
-					"match": "\\b(?:event|option|type|function)\\b",
+					"match": "\\b(?:event|option|type|function|import|as|scope)\\b",
 					"name": "keyword.control.blink"
 				}
 			]
@@ -163,7 +163,7 @@
 		"types": {
 			"patterns": [
 				{
-					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f32|f64|boolean|string|buffer|unknown|Instance|Color3|vector|CFrame)\\b",
+					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f16|f32|f64|boolean|string|buffer|unknown|Instance|Color3|vector|CFrame)\\b",
 					"name": "storage.type.blink"
 				}
 			]
@@ -257,15 +257,12 @@
 			"patterns": [
 				{ "include": "#symbols" },
 				{ "include": "#types" },
+				{ "include": "#keywords" },
 				{
 					"match": "([a-zA-Z_]\\w*):",
 					"captures": {
 						"1": { "name": "variable.other.readwrite.blink" }
 					}
-				},
-				{
-					"match": "\\b(?:event|option|type|function)\\b",
-					"name": "keyword.control.blink"
 				},
 				{
 					"match": "[a-zA-Z_]\\w*",

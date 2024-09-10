@@ -1,12 +1,19 @@
 import * as vscode from 'vscode';
 
 const Operators = ['true', 'false'] as const;
+const OperatorsJoined = Operators.join();
 
 const Locations = ['Server', 'Client'] as const;
+const LocationsJoined = Locations.join();
 
 const Brand = ['Reliable', 'Unreliable'] as const;
+const BrandsJoined = Brand.join();
+
+const YieldTypes = ['Coroutine', 'Future', 'Promise'] as const;
+const YieldTypesJoined = Brand.join();
 
 const Calls = ['SingleSync', 'SingleAsync', 'ManySync', 'ManyAsync'] as const;
+const CallsJoined = Calls.join();
 
 const Options = [
     'Typescript',
@@ -20,6 +27,7 @@ const Options = [
     'FutureLibrary',
     'PromiseLibrary',
 ] as const;
+const OptionsJoined = Options.join();
 
 const Casing = ['Pascal', 'Camel', 'Snake'].map((value) => `"${value}"`);
 
@@ -30,6 +38,7 @@ const types = [
     'i8',
     'i16',
     'i32',
+    'f16',
     'f32',
     'f64',
     'boolean',
@@ -42,16 +51,7 @@ const types = [
     'CFrame',
 ] as const;
 
-const EventParamToArray = {
-    From: Locations,
-    Type: Brand,
-    Call: Calls,
-    Data: [],
-} as const;
-
 const WordToArray = {
-    ...EventParamToArray,
-
     option: Options,
 
     Casing: Casing,
@@ -69,13 +69,13 @@ const WordToArray = {
 
 const autocompleteKeys = {
     event: {
-        From: ['Server', 'Client'],
-        Type: ['Reliable', 'Unreliable'],
-        Call: ['SingleSync', 'SingleAsync', 'ManySync', 'ManyAsync'],
+        From: Locations,
+        Type: Brand,
+        Call: Calls,
         Data: [],
     },
     function: {
-        Yield: ['Coroutine', 'Future', 'Promise'],
+        Yield: YieldTypes,
         Data: [],
         Return: [],
     },
@@ -87,32 +87,46 @@ function getWordUntilPosition(
     document: vscode.TextDocument,
     position: vscode.Position
 ) {
-    const text = document.lineAt(position.line).text;
     const word = document.getWordRangeAtPosition(position);
 
-    if (!word) {
-        return {
-            text: '',
-            startColumn: 0,
-            endColumn: 0,
-        };
+    let wordStart = word
+        ? word.start.character - 1 < 0
+            ? 0
+            : word.start.character - 1
+        : position.character - 1 < 0
+          ? 0
+          : position.character - 1;
+    let wordBefore = document.getWordRangeAtPosition(
+        new vscode.Position(position.line, wordStart),
+        /[\w.-]+(?=\s+.*?[\w.-]?)/i
+    );
+    while (wordStart > 0 && wordBefore === undefined) {
+        wordStart -= 1;
+        wordBefore = document.getWordRangeAtPosition(
+            new vscode.Position(position.line, wordStart),
+            /[\w.-]+(?=\s+.*?[\w.-]?)/i
+        );
     }
 
-    const wordStart =
-        word.start.character - 1 < 0 ? 0 : word.start.character - 1;
-    const wordBefore = document.getWordRangeAtPosition(
-        new vscode.Position(position.line, wordStart)
-    );
-
-    const wordString = wordBefore
-        ? text.slice(word.start.character, word.end.character)
-        : word;
-
-    return {
-        text: wordString,
-        startColumn: word.start.character,
-        endColumn: word.end.character,
-    };
+    const text = document.lineAt(position.line).text;
+    if (wordBefore !== undefined) {
+        return {
+            text: text.slice(
+                wordBefore.start.character,
+                wordBefore.end.character
+            ),
+            startColumn: wordBefore.start.character,
+            endColumn: wordBefore.end.character,
+        };
+    } else {
+        return {
+            text: word
+                ? text.slice(word.start.character, word.end.character)
+                : '',
+            startColumn: word ? word.start.character : 0,
+            endColumn: word ? word.end.character : 0,
+        };
+    }
 }
 
 // This function goes through all words, and returns the word that is currently inside the cursor position
@@ -143,9 +157,9 @@ function getWordAtPosition(
 }
 
 const tableTypeRegex =
-    /(event|function)\s*\w+\s*=\s*[{,;]\s*[A-Za-z]+\s*:?[^,}]*$/i;
+    /(event|function)\s*\w+\s*[{,;]\s*[A-Za-z]*\s*:?[^,}]*$/i;
 const isValueRegex = /([{,;])\s*([A-Za-z]+\s*):[^{,]*$/i;
-const isKeyRegex = /([{,;])\s*([A-Za-z]+\s*)$/i;
+const isKeyRegex = /([{,;])\s*([A-Za-z]*\s*)$/i;
 
 function getTableType(
     slicedText: string[],
@@ -185,25 +199,28 @@ function getTableType(
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.languages.registerCompletionItemProvider(
-            'zap',
+            'blink',
             {
                 provideCompletionItems: (document, position) => {
                     // Modified version of Editor.vue Monaco autocomplete
-                    const word = getWordUntilPosition(document, position);
+                    //const word = getWordAtPosition(document, position);
                     const range = new vscode.Range(
                         position.line,
-                        word.startColumn,
+                        0,
                         position.line,
-                        word.endColumn
+                        0
                     );
+                    const lineEmpty = document.lineAt(
+                        position.line
+                    ).isEmptyOrWhitespace;
 
-                    if (range.start.character === 0) {
+                    if (lineEmpty) {
                         const suggestions = [
                             {
                                 label: 'type',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    'type ${1} = ${2}\n'
+                                    'type ${1:TypeName} = $0'
                                 ),
                                 documentation: 'Type Statement',
                                 range: range,
@@ -212,7 +229,7 @@ export function activate(context: vscode.ExtensionContext) {
                                 label: 'option',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    'option ${1} = ${2}\n'
+                                    `option \${1|${OptionsJoined}|} = $0`
                                 ),
                                 documentation: 'Settings',
                                 range: range,
@@ -221,7 +238,12 @@ export function activate(context: vscode.ExtensionContext) {
                                 label: 'event',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    'event ${1}'
+                                    `event \${1:EventName} {
+                                    \tFrom: \${2|${LocationsJoined}|},
+                                    \tType: \${3|${BrandsJoined}|},
+                                    \tCall: \${4|${CallsJoined}|},
+                                    \tData: $0
+                                    }`
                                 ),
                                 documentation: 'Event',
                                 range: range,
@@ -230,33 +252,89 @@ export function activate(context: vscode.ExtensionContext) {
                                 label: 'function',
                                 kind: vscode.CompletionItemKind.Snippet,
                                 insertText: new vscode.SnippetString(
-                                    'function ${1}'
+                                    `function \${1:FuncName} {
+                                    \tYield: \${2|${YieldTypesJoined}|},
+                                    \tReturn: $3,
+                                    \tData: $0
+                                    }`
                                 ),
-                                documentation: 'Event',
+                                documentation: 'Function',
+                                range: range,
+                            },
+                            {
+                                label: 'enum',
+                                kind: vscode.CompletionItemKind.Snippet,
+                                insertText: new vscode.SnippetString(
+                                    'enum ${1:EnumName} = {$0}'
+                                ),
+                                documentation: 'Enum Statement',
+                                range: range,
+                            },
+                            {
+                                label: 'tagged enum',
+                                kind: vscode.CompletionItemKind.Snippet,
+                                insertText: new vscode.SnippetString(
+                                    'enum ${1:EnumName} = "${2:TagName}" {\n\t$0\n}'
+                                ),
+                                documentation: 'Tagged Enum Statement',
+                                range: range,
+                            },
+                            {
+                                label: 'map',
+                                kind: vscode.CompletionItemKind.Snippet,
+                                insertText: new vscode.SnippetString(
+                                    'map ${1:MapName} = {[${2:string}]: ${3:u8}}'
+                                ),
+                                documentation: 'Map Statement',
+                                range: range,
+                            },
+                            {
+                                label: 'set',
+                                kind: vscode.CompletionItemKind.Snippet,
+                                insertText: new vscode.SnippetString(
+                                    'set ${1:SetName} = {$0}'
+                                ),
+                                documentation: 'Set Statement',
+                                range: range,
+                            },
+                            {
+                                label: 'struct',
+                                kind: vscode.CompletionItemKind.Snippet,
+                                insertText: new vscode.SnippetString(
+                                    'struct ${1} {\n\t$0\n}'
+                                ),
+                                documentation: 'Struct Statement',
+                                range: range,
+                            },
+                            {
+                                label: 'import',
+                                kind: vscode.CompletionItemKind.Snippet,
+                                insertText: new vscode.SnippetString(
+                                    'import "${1:./$TM_FILENAME}"${2:as Something}'
+                                ),
+                                documentation: 'Import Statement',
+                                range: range,
+                            },
+                            {
+                                label: 'scope',
+                                kind: vscode.CompletionItemKind.Snippet,
+                                insertText: new vscode.SnippetString(
+                                    'scope ${1} {\n\t$0\n}'
+                                ),
+                                documentation: 'Scope Statement',
                                 range: range,
                             },
                         ];
                         return suggestions;
                     } else {
-                        let i = -1;
-                        let wordBefore = getWordAtPosition(document, position);
+                        const wordBefore = getWordUntilPosition(
+                            document,
+                            position
+                        );
                         const keyIndex =
                             wordBefore.text as keyof typeof WordToArray;
 
-                        while (!wordBefore && word.startColumn + i > 0) {
-                            wordBefore = getWordAtPosition(
-                                document,
-                                new vscode.Position(
-                                    position.line,
-                                    word.startColumn + i
-                                )
-                            );
-                            i--;
-                        }
-
-                        const arr = !wordBefore
-                            ? Object.keys(EventParamToArray)
-                            : (WordToArray[keyIndex] ?? types);
+                        const arr = WordToArray[keyIndex] ?? types;
 
                         const identifiers = arr.map((k) => {
                             return new vscode.CompletionItem(
@@ -301,21 +379,23 @@ export function activate(context: vscode.ExtensionContext) {
                         .split('\n')
                         .slice(0, position.line + 1);
 
+                    slicedText[position.line] = slicedText[position.line].slice(
+                        0,
+                        position.character
+                    );
+
                     let totalTextSize = 0;
                     slicedText.forEach((line) => {
                         totalTextSize += line.length;
                     });
 
+                    // Compensate for newlines when we join/slice later.
+                    totalTextSize += slicedText.length - 1;
                     let currentPosition =
                         totalTextSize -
                         (slicedText[position.line].length -
-                            position.character) +
-                        2;
-
-                    slicedText[position.line] = slicedText[position.line].slice(
-                        0,
-                        position.character
-                    );
+                            position.character) -
+                        1;
 
                     if (
                         slicedText[position.line].substring(
@@ -344,7 +424,7 @@ export function activate(context: vscode.ExtensionContext) {
                                 variableType =
                                     slicedText
                                         .join('\n')
-                                        .slice(0, currentPosition)
+                                        .slice(0, currentPosition + 1)
                                         .match(tableTypeRegex)?.[1] ?? null;
                             } else {
                                 variableType = getTableType(
