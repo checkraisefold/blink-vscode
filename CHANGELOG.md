@@ -1,4 +1,8 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.1
+
+- Added highlighting for types in map keys.
+
 # 0.1.0
 
 - Added the `scope`, `import`, `as` keywords.

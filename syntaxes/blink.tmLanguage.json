@@ -6,7 +6,6 @@
 		{ "include": "#comments" },
 		{ "include": "#brackets" },
 		{ "include": "#autoClosingPairs" },
-		{ "include": "#objectAssignment" },
 		{ "include": "#surroundingPairs" },
 		{ "include": "#typeKeywords" },
 		{ "include": "#keywords" },
@@ -49,9 +48,7 @@
 						{ "include": "#brackets" },
 						{
 							"match": "([a-zA-Z_]\\w*):",
-							"captures": {
-								"1": { "name": "variable.other.blink" }
-							}
+							"captures": { "1": { "name": "variable.other.blink" } }
 						},
 						{
 							"match": "([a-zA-Z_]\\w*)\\s*,",
@@ -63,9 +60,7 @@
 						},
 						{
 							"match": "([a-zA-Z_]\\w*)\\s*}",
-							"captures": {
-								"1": { "name": "variable.other.blink" }
-							},
+							"captures": { "1": { "name": "variable.other.blink" } },
 							"name": "meta.array-assignment.blink"
 						}
 					]
@@ -75,14 +70,13 @@
 					"end": "\\]",
 					"name": "punctuation.section.brackets.blink",
 					"patterns": [
+						{ "include": "#types" },
 						{ "include": "#numbers" },
 						{ "include": "#delimiters" },
 						{ "include": "#strIdentifiers" },
 						{
 							"match": "([a-zA-Z_]\\w*)",
-							"captures": {
-								"1": { "name": "variable.other.blink" }
-							}
+							"captures": { "1": { "name": "variable.other.blink" } }
 						}
 					]
 				},
@@ -106,9 +100,7 @@
 						{ "include": "#strIdentifiers" },
 						{
 							"match": "([a-zA-Z_]\\w*)\\s*,?",
-							"captures": {
-								"1": { "name": "storage.type.blink" }
-							}
+							"captures": { "1": { "name": "storage.type.blink" } }
 						}
 					]
 				}
@@ -218,9 +210,7 @@
 				{
 					"begin": "--\\[([=]*)\\[",
 					"end": "$",
-					"captures": {
-						"1": { "name": "punctuation.definition.comment.blink" }
-					},
+					"captures": { "1": { "name": "punctuation.definition.comment.blink" } },
 					"name": "comment.block.documentation.blink"
 				},
 				{
@@ -260,9 +250,7 @@
 				{ "include": "#keywords" },
 				{
 					"match": "([a-zA-Z_]\\w*):",
-					"captures": {
-						"1": { "name": "variable.other.readwrite.blink" }
-					}
+					"captures": { "1": { "name": "variable.other.readwrite.blink" } }
 				},
 				{
 					"match": "[a-zA-Z_]\\w*",
