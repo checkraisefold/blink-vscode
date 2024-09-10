@@ -10,7 +10,7 @@ on:
     - main
 
 env:
-    CI: true
+  CI: true
 
 jobs:
   eslint:
