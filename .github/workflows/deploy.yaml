@@ -8,14 +8,6 @@ env:
 
 name: Release & Deploy
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          draft: true
-
   deploy:
     runs-on: ubuntu-latest
     needs: release
@@ -39,4 +31,5 @@ jobs:
       - name: Upload vsix
         uses: softprops/action-gh-release@v2
         with:
+          draft: true
           files: ${{ steps.publishToOpenVSX.outputs.vsixPath }}
