@@ -7,9 +7,9 @@ A simple extension that provides intellisense and highlighting for the [Blink](h
 [![License](https://img.shields.io/github/license/checkraisefold/blink-vscode)](https://github.com/checkraisefold/blink-vscode/blob/master/LICENSE.md)
 [![CI](https://github.com/checkraisefold/blink-vscode/actions/workflows/ci.yaml/badge.svg)](https://github.com/checkraisefold/blink-vscode/actions)
 [![Version](https://img.shields.io/visual-studio-marketplace/v/checkraisefold.blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
+[![Version (OpenVSX)](https://img.shields.io/open-vsx/v/checkraisefold/blink-vscode?label=openvsx%20version)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)\
 [![Installs](https://img.shields.io/visual-studio-marketplace/d/checkraisefold.blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
-[![Version (OpenVSX)](https://img.shields.io/open-vsx/v/checkraisefold/blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
-[![Installs (OpenVSX)](https://img.shields.io/open-vsx/dt/checkraisefold/blink-vscode)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
+[![Installs (OpenVSX)](https://img.shields.io/open-vsx/dt/checkraisefold/blink-vscode?label=openvsx%20downloads)](https://marketplace.visualstudio.com/items?itemName=checkraisefold.blink-vscode)
 
 </div>
 
