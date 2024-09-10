@@ -72,6 +72,7 @@ const autocompleteKeys = {
         From: Locations,
         Type: Brand,
         Call: Calls,
+        Poll: Operators,
         Data: [],
     },
     function: {
@@ -127,33 +128,6 @@ function getWordUntilPosition(
             endColumn: word ? word.end.character : 0,
         };
     }
-}
-
-// This function goes through all words, and returns the word that is currently inside the cursor position
-function getWordAtPosition(
-    document: vscode.TextDocument,
-    position: vscode.Position
-) {
-    const text = document.lineAt(position.line).text;
-    const word = document.getWordRangeAtPosition(position);
-
-    if (!word) {
-        return {
-            text: '',
-            startColumn: 0,
-            endColumn: 0,
-        };
-    }
-
-    const wordString = word
-        ? text.slice(word.start.character, word.end.character)
-        : '';
-
-    return {
-        text: wordString,
-        startColumn: word.start.character,
-        endColumn: word.end.character,
-    };
 }
 
 const tableTypeRegex =
@@ -242,6 +216,7 @@ export function activate(context: vscode.ExtensionContext) {
                                     \tFrom: \${2|${LocationsJoined}|},
                                     \tType: \${3|${BrandsJoined}|},
                                     \tCall: \${4|${CallsJoined}|},
+                                    \tPoll: \${4|${OperatorsJoined}|},
                                     \tData: $0
                                     }`
                                 ),

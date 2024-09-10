@@ -2,7 +2,7 @@
     "name": "blink-vscode",
     "displayName": "Blink",
     "description": "Syntax highlighting & intellisense for the Blink IDL.",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "publisher": "checkraisefold",
     "repository": "https://github.com/checkraisefold/blink-vscode",
     "license": "MIT",
