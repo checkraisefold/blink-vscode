@@ -15,7 +15,9 @@
     "keywords": [
         "blink",
         "highlighting",
-        "syntax"
+        "syntax",
+        "intellisense",
+        "support"
     ],
     "contributes": {
         "languages": [
