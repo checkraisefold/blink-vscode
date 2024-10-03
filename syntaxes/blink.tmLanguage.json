@@ -4,6 +4,7 @@
 	"scopeName": "source.blink",
 	"patterns": [
 		{ "include": "#comments" },
+		{ "include": "#scope" },
 		{ "include": "#brackets" },
 		{ "include": "#autoClosingPairs" },
 		{ "include": "#surroundingPairs" },
@@ -30,6 +31,21 @@
 				{
 					"match": "--.*$",
 					"name": "comment.line.double-dash.blink"
+				}
+			]
+		},
+		"scope": {
+			"patterns": [
+				{
+					"begin": "(scope)\\s+([a-zA-Z_]\\w*)\\s*\\{",
+					"end": "\\}",
+					"captures": {
+						"1": { "name": "keyword.control.blink" },
+						"2": { "name": "variable.other.blink" }
+					},
+					"patterns": [
+						{ "include": "source.blink" }
+					]
 				}
 			]
 		},
