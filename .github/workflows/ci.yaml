@@ -13,8 +13,8 @@ env:
   CI: true
 
 jobs:
-  eslint:
-    name: ESLint
+  tests:
+    name: ESLint, Prettier, Grammar Tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -25,17 +25,11 @@ jobs:
       run: npm ci
     - name: ESLint
       run: npm run ci:eslint
-  prettier:
-    name: Prettier
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '22'
-    - name: Install
-      run: npm ci
     - name: Prettier
+      if: '!cancelled()'
+      run: npm run ci:prettier
+    - name: Grammar
+      if: '!cancelled()'
       run: npm run ci:prettier
   typescript:
     name: TypeScript Compiler Check
@@ -48,9 +42,4 @@ jobs:
     - name: Install
       run: npm ci
     - name: TypeScript
-      run: npm run ci:tsc     
-    
-
-               
-   
-            
+      run: npm run ci:tsc
