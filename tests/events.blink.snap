@@ -1,0 +1,133 @@
+>-- SYNTAX TEST "source.blink" "events"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.blink comment.line.double-dash.blink
+>
+>event Example {
+#^^^^^ source.blink keyword.control.blink
+#     ^ source.blink text.whitespace.blink
+#      ^^^^^^^ source.blink variable.other.blink
+#             ^ source.blink text.whitespace.blink
+#              ^ source.blink punctuation.section.braces.blink
+>	From: Server,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#     ^ source.blink punctuation.section.braces.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#             ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Type: Reliable,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#     ^ source.blink punctuation.section.braces.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^^^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#               ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Call: SingleSync,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#     ^ source.blink punctuation.section.braces.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^^^^^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#                 ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Data: (u8, u16, Instance, Instance, u8)
+#^ source.blink punctuation.section.braces.blink
+# ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#     ^ source.blink punctuation.section.braces.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#        ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#         ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
+#          ^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#             ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
+#              ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
+#               ^^^^^^^^^^^^^^^^^^^^^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#                                      ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
+#                                       ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+>}
+#^ source.blink punctuation.section.braces.blink
+>
+>function Example {
+#^^^^^^^^ source.blink keyword.control.blink
+#        ^ source.blink text.whitespace.blink
+#         ^^^^^^^ source.blink variable.other.blink
+#                ^ source.blink text.whitespace.blink
+#                 ^ source.blink punctuation.section.braces.blink
+>	Yield: Coroutine,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^ source.blink punctuation.section.braces.blink
+#        ^^^^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#                 ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Data: u8,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#     ^ source.blink punctuation.section.braces.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^^ source.blink punctuation.section.braces.blink storage.type.blink
+#         ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Return: u8
+#^ source.blink punctuation.section.braces.blink
+# ^^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#       ^ source.blink punctuation.section.braces.blink
+#        ^ source.blink punctuation.section.braces.blink
+#         ^^ source.blink punctuation.section.braces.blink storage.type.blink
+>}
+#^ source.blink punctuation.section.braces.blink
+>
+>function ExampleFuture {
+#^^^^^^^^ source.blink keyword.control.blink
+#        ^ source.blink text.whitespace.blink
+#         ^^^^^^^^^^^^^ source.blink variable.other.blink
+#                      ^ source.blink text.whitespace.blink
+#                       ^ source.blink punctuation.section.braces.blink
+>	Yield: Future,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^ source.blink punctuation.section.braces.blink
+#        ^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#              ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Data: u8,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#     ^ source.blink punctuation.section.braces.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^^ source.blink punctuation.section.braces.blink storage.type.blink
+#         ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Return: u8
+#^ source.blink punctuation.section.braces.blink
+# ^^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#       ^ source.blink punctuation.section.braces.blink
+#        ^ source.blink punctuation.section.braces.blink
+#         ^^ source.blink punctuation.section.braces.blink storage.type.blink
+>}
+#^ source.blink punctuation.section.braces.blink
+>
+>function ExamplePromise {
+#^^^^^^^^ source.blink keyword.control.blink
+#        ^ source.blink text.whitespace.blink
+#         ^^^^^^^^^^^^^^ source.blink variable.other.blink
+#                       ^ source.blink text.whitespace.blink
+#                        ^ source.blink punctuation.section.braces.blink
+>	Yield: Promise,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^ source.blink punctuation.section.braces.blink
+#        ^^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#               ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Data: u8,
+#^ source.blink punctuation.section.braces.blink
+# ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#     ^ source.blink punctuation.section.braces.blink
+#      ^ source.blink punctuation.section.braces.blink
+#       ^^ source.blink punctuation.section.braces.blink storage.type.blink
+#         ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>	Return: u8
+#^ source.blink punctuation.section.braces.blink
+# ^^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#       ^ source.blink punctuation.section.braces.blink
+#        ^ source.blink punctuation.section.braces.blink
+#         ^^ source.blink punctuation.section.braces.blink storage.type.blink
+>}
+#^ source.blink punctuation.section.braces.blink

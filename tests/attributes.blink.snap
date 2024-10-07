@@ -1,0 +1,151 @@
+>-- SYNTAX TEST "source.blink" "attributes"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.blink comment.line.double-dash.blink
+>
+>type Simple = u8
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^^^^^^ source.blink variable.other.blink
+#           ^ source.blink text.whitespace.blink
+#            ^ source.blink keyword.operator.blink
+#             ^ source.blink text.whitespace.blink
+#              ^^ source.blink storage.type.blink
+>type Optional = u8?
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^^^^^^^^ source.blink variable.other.blink
+#             ^ source.blink text.whitespace.blink
+#              ^ source.blink keyword.operator.blink
+#               ^ source.blink text.whitespace.blink
+#                ^^ source.blink storage.type.blink
+#                  ^ source.blink keyword.operator.optional.blink
+>type Array = u8[1]
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^^^^^ source.blink variable.other.blink
+#          ^ source.blink text.whitespace.blink
+#           ^ source.blink keyword.operator.blink
+#            ^ source.blink text.whitespace.blink
+#             ^^ source.blink storage.type.blink
+#               ^ source.blink punctuation.section.brackets.blink
+#                ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                 ^ source.blink punctuation.section.brackets.blink
+>type Range = u8[0..100]
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^^^^^ source.blink variable.other.blink
+#          ^ source.blink text.whitespace.blink
+#           ^ source.blink keyword.operator.blink
+#            ^ source.blink text.whitespace.blink
+#             ^^ source.blink storage.type.blink
+#               ^ source.blink punctuation.section.brackets.blink
+#                ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                 ^^ source.blink punctuation.section.brackets.blink
+#                   ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                    ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                     ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                      ^ source.blink punctuation.section.brackets.blink
+>type VectorInt16 = vector<i16>
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^^^^^^^^^^^ source.blink variable.other.blink
+#                ^ source.blink text.whitespace.blink
+#                 ^ source.blink keyword.operator.blink
+#                  ^ source.blink text.whitespace.blink
+#                   ^^^^^^ source.blink storage.type.blink
+#                         ^ source.blink punctuation.section.chevrons.blink
+#                          ^^^ source.blink punctuation.section.chevrons.blink storage.type.blink
+#                             ^ source.blink punctuation.section.chevrons.blink
+>type Orientation = CFrame<i16, f16>
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^^^^^^^^^^^ source.blink variable.other.blink
+#                ^ source.blink text.whitespace.blink
+#                 ^ source.blink keyword.operator.blink
+#                  ^ source.blink text.whitespace.blink
+#                   ^^^^^^ source.blink storage.type.blink
+#                         ^ source.blink punctuation.section.chevrons.blink
+#                          ^^^ source.blink punctuation.section.chevrons.blink storage.type.blink
+#                             ^ source.blink punctuation.section.chevrons.blink
+#                              ^ source.blink punctuation.section.chevrons.blink
+#                               ^^^ source.blink punctuation.section.chevrons.blink storage.type.blink
+#                                  ^ source.blink punctuation.section.chevrons.blink
+>map Players = {[u8]: Instance(Player)}[0..255]
+#^^^ source.blink keyword.control.blink
+#   ^ source.blink text.whitespace.blink
+#    ^^^^^^^ source.blink variable.other.blink
+#           ^ source.blink text.whitespace.blink
+#            ^ source.blink keyword.operator.blink
+#             ^ source.blink text.whitespace.blink
+#              ^ source.blink punctuation.section.braces.blink
+#               ^ source.blink punctuation.section.braces.blink punctuation.section.brackets.blink
+#                ^^ source.blink punctuation.section.braces.blink punctuation.section.brackets.blink storage.type.blink
+#                  ^ source.blink punctuation.section.braces.blink punctuation.section.brackets.blink
+#                   ^ source.blink punctuation.section.braces.blink keyword.operator.blink
+#                    ^ source.blink punctuation.section.braces.blink
+#                     ^^^^^^^^ source.blink punctuation.section.braces.blink storage.type.blink
+#                             ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#                              ^^^^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#                                    ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#                                     ^ source.blink punctuation.section.braces.blink
+#                                      ^ source.blink punctuation.section.brackets.blink
+#                                       ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                                        ^^ source.blink punctuation.section.brackets.blink
+#                                          ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                                           ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                                            ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                                             ^ source.blink punctuation.section.brackets.blink
+>enum States = (A, B, C, D)[0..255]
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^^^^^^ source.blink variable.other.blink
+#           ^ source.blink text.whitespace.blink
+#            ^ source.blink keyword.operator.blink
+#             ^ source.blink text.whitespace.blink
+#              ^ source.blink punctuation.section.parens.blink
+#               ^^^^^^^^^^ source.blink punctuation.section.parens.blink
+#                         ^ source.blink punctuation.section.parens.blink
+#                          ^ source.blink punctuation.section.brackets.blink
+#                           ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                            ^^ source.blink punctuation.section.brackets.blink
+#                              ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                               ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                                ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#                                 ^ source.blink punctuation.section.brackets.blink
+>struct Dictionary {
+#^^^^^^ source.blink keyword.control.blink
+#      ^ source.blink text.whitespace.blink
+#       ^^^^^^^^^^ source.blink variable.other.blink
+#                 ^ source.blink text.whitespace.blink
+#                  ^ source.blink punctuation.section.braces.blink
+>    Field: u8
+#^^^^ source.blink punctuation.section.braces.blink
+#    ^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#         ^ source.blink punctuation.section.braces.blink
+#          ^ source.blink punctuation.section.braces.blink
+#           ^^ source.blink punctuation.section.braces.blink storage.type.blink
+>    Field2: map { [string]: u8 }
+#^^^^ source.blink punctuation.section.braces.blink
+#    ^^^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#          ^ source.blink punctuation.section.braces.blink
+#           ^ source.blink punctuation.section.braces.blink
+#            ^^^ source.blink punctuation.section.braces.blink keyword.control.blink
+#               ^ source.blink punctuation.section.braces.blink
+#                ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink
+#                 ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink
+#                  ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink punctuation.section.brackets.blink
+#                   ^^^^^^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink punctuation.section.brackets.blink storage.type.blink
+#                         ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink punctuation.section.brackets.blink
+#                          ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink keyword.operator.blink
+#                           ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink
+#                            ^^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink storage.type.blink
+#                              ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink
+#                               ^ source.blink punctuation.section.braces.blink punctuation.section.braces.blink
+>}[0..255]
+#^ source.blink punctuation.section.braces.blink
+# ^ source.blink punctuation.section.brackets.blink
+#  ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#   ^^ source.blink punctuation.section.brackets.blink
+#     ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#      ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#       ^ source.blink punctuation.section.brackets.blink constant.numeric.blink
+#        ^ source.blink punctuation.section.brackets.blink

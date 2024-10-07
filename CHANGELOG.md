@@ -1,4 +1,10 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.4
+
+- Fix highlighting rules for the `scope` keyword usage, no longer graying out everything in the scope.
+- Fix array type matching never ending, no longer breaking highlighting for the rest of the file.
+- Improved other parts of `scope` highlighting. Improved highlighting of `Server`, `SingleSync`, and the other enum member types.
+
 # 0.1.3
 
 - Fixed commas in snippets.

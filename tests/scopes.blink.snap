@@ -1,0 +1,98 @@
+>-- SYNTAX TEST "source.blink" "scopes"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.blink comment.line.double-dash.blink
+>
+>scope ExampleScope {
+#^^^^^ source.blink keyword.control.blink
+#     ^ source.blink
+#      ^^^^^^^^^^^^ source.blink storage.type.namespace.blink
+#                  ^ source.blink
+#                   ^ source.blink punctuation.section.braces.blink
+>    type InScopeType = u8
+#^^^^ source.blink text.whitespace.blink
+#    ^^^^ source.blink keyword.control.blink
+#        ^ source.blink text.whitespace.blink
+#         ^^^^^^^^^^^ source.blink variable.other.blink
+#                    ^ source.blink text.whitespace.blink
+#                     ^ source.blink keyword.operator.blink
+#                      ^ source.blink text.whitespace.blink
+#                       ^^ source.blink storage.type.blink
+>    event InScopeEvent {
+#^^^^ source.blink text.whitespace.blink
+#    ^^^^^ source.blink keyword.control.blink
+#         ^ source.blink text.whitespace.blink
+#          ^^^^^^^^^^^^ source.blink variable.other.blink
+#                      ^ source.blink text.whitespace.blink
+#                       ^ source.blink punctuation.section.braces.blink
+>        From: Server,
+#^^^^^^^^ source.blink punctuation.section.braces.blink
+#        ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#            ^ source.blink punctuation.section.braces.blink
+#             ^ source.blink punctuation.section.braces.blink
+#              ^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#                    ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>        Type: Reliable,
+#^^^^^^^^ source.blink punctuation.section.braces.blink
+#        ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#            ^ source.blink punctuation.section.braces.blink
+#             ^ source.blink punctuation.section.braces.blink
+#              ^^^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#                      ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>        Call: SingleSync,
+#^^^^^^^^ source.blink punctuation.section.braces.blink
+#        ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#            ^ source.blink punctuation.section.braces.blink
+#             ^ source.blink punctuation.section.braces.blink
+#              ^^^^^^^^^^ source.blink punctuation.section.braces.blink entity.name.type.enum.blink
+#                        ^ source.blink punctuation.section.braces.blink punctuation.separator.comma.blink
+>        Data: u8
+#^^^^^^^^ source.blink punctuation.section.braces.blink
+#        ^^^^ source.blink punctuation.section.braces.blink variable.other.blink
+#            ^ source.blink punctuation.section.braces.blink
+#             ^ source.blink punctuation.section.braces.blink
+#              ^^ source.blink punctuation.section.braces.blink storage.type.blink
+>    }
+#^^^^ source.blink punctuation.section.braces.blink
+#    ^ source.blink punctuation.section.braces.blink
+>	import "attributes.blink" as Something
+#^ source.blink text.whitespace.blink
+# ^^^^^^ source.blink keyword.control.blink
+#       ^ source.blink text.whitespace.blink
+#        ^ source.blink string.quoted.double.blink
+#         ^^^^^^^^^^^^^^^^ source.blink string.quoted.double.blink
+#                         ^ source.blink string.quoted.double.blink
+#                          ^ source.blink text.whitespace.blink
+#                           ^^ source.blink keyword.control.blink
+#                             ^ source.blink text.whitespace.blink
+#                              ^^^^^^^^^ source.blink variable.other.blink
+>}
+#^ source.blink punctuation.section.braces.blink
+> 
+>struct Example {
+#^^^^^^ source.blink keyword.control.blink
+#      ^ source.blink text.whitespace.blink
+#       ^^^^^^^ source.blink variable.other.blink
+#              ^ source.blink text.whitespace.blink
+#               ^ source.blink punctuation.section.braces.blink
+>    Reference = ExampleScope.InScopeType
+#^^^^ source.blink punctuation.section.braces.blink
+#    ^^^^^^^^^ source.blink punctuation.section.braces.blink meta.array-assignment.blink variable.other.blink
+#             ^ source.blink punctuation.section.braces.blink meta.array-assignment.blink
+#              ^ source.blink punctuation.section.braces.blink keyword.operator.blink
+#               ^ source.blink punctuation.section.braces.blink
+#                ^^^^^^^^^^^^ source.blink punctuation.section.braces.blink meta.array-assignment.blink variable.other.blink
+#                            ^ source.blink punctuation.section.braces.blink
+#                             ^^^^^^^^^^^ source.blink punctuation.section.braces.blink meta.array-assignment.blink variable.other.blink
+>}
+#^ source.blink punctuation.section.braces.blink
+>type a = ExampleScope.Something.VectorInt16
+#^^^^ source.blink keyword.control.blink
+#    ^ source.blink text.whitespace.blink
+#     ^ source.blink variable.other.blink
+#      ^ source.blink text.whitespace.blink
+#       ^ source.blink keyword.operator.blink
+#        ^ source.blink text.whitespace.blink
+#         ^^^^^^^^^^^^ source.blink variable.other.blink
+#                     ^ source.blink
+#                      ^^^^^^^^^ source.blink variable.other.blink
+#                               ^ source.blink
+#                                ^^^^^^^^^^^ source.blink variable.other.blink

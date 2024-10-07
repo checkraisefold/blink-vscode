@@ -37,15 +37,15 @@
 		"scope": {
 			"patterns": [
 				{
-					"begin": "(scope)\\s+([a-zA-Z_]\\w*)\\s*\\{",
-					"end": "\\}",
-					"captures": {
+					"begin": "\\b(scope)\\b\\s+([a-zA-Z_]*)\\b\\s+(\\{)",
+					"end": "(\\})",
+					"beginCaptures": {
 						"1": { "name": "keyword.control.blink" },
-						"2": { "name": "variable.other.blink" }
+						"2": { "name": "storage.type.namespace.blink" },
+						"3": { "name": "punctuation.section.braces.blink" }
 					},
-					"patterns": [
-						{ "include": "source.blink" }
-					]
+					"endCaptures": { "1": { "name": "punctuation.section.braces.blink" } },
+					"patterns": [ { "include": "source.blink" } ]
 				}
 			]
 		},
@@ -180,7 +180,7 @@
 			"patterns": [
 				{
 					"match": "\\b(?:Server|Client|Reliable|Unreliable|SingleSync|SingleAsync|ManySync|ManyAsync|Coroutine|Future|Promise|Pascal|Camel|Snake)\\b",
-					"name": "variable.other.enummember"
+					"name": "entity.name.type.enum.blink"
 				}
 			]
 		},

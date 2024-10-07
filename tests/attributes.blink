@@ -10,4 +10,5 @@ map Players = {[u8]: Instance(Player)}[0..255]
 enum States = (A, B, C, D)[0..255]
 struct Dictionary {
     Field: u8
+    Field2: map { [string]: u8 }
 }[0..255]
