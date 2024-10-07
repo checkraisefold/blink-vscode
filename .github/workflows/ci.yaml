@@ -30,7 +30,7 @@ jobs:
       run: npm run ci:prettier
     - name: Grammar
       if: '!cancelled()'
-      run: npm run ci:prettier
+      run: npm run grammar:test
   typescript:
     name: TypeScript Compiler Check
     runs-on: ubuntu-latest
