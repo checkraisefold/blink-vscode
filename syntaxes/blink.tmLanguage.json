@@ -61,6 +61,7 @@
 						{ "include": "#operators" },
 						{ "include": "#setting" },
 						{ "include": "#symbols" },
+						{ "include": "#comments" },
 						{ "include": "#brackets" },
 						{
 							"match": "([a-zA-Z_]\\w*):",
@@ -155,7 +156,7 @@
 		"keywords": {
 			"patterns": [
 				{
-					"match": "\\b(?:event|option|type|function|import|as|scope)\\b",
+					"match": "\\b(?:event|option|type|function|import|export|as|scope)\\b",
 					"name": "keyword.control.blink"
 				}
 			]

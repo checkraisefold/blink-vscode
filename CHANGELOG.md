@@ -1,4 +1,9 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.5
+
+- Add `export` keyword to syntax highlighting.
+- Fixed syntax highlighting of comments inside of types/brackets.
+
 # 0.1.4
 
 - Fix highlighting rules for the `scope` keyword usage, no longer graying out everything in the scope.
