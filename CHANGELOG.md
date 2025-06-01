@@ -1,4 +1,8 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.6
+
+- Add `Polling` call type to syntax highlighting.
+
 # 0.1.5
 
 - Add `export` keyword to syntax highlighting.
