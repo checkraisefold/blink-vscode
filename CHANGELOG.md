@@ -1,4 +1,8 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.8
+
+- Fix syntax highlighting for types inside of type packs.
+
 # 0.1.7
 
 - Add `BrickColor`, `DateTime`, and `DateTimeMillis` types to syntax highlighting.

@@ -34,13 +34,15 @@
 #     ^ source.blink punctuation.section.braces.blink
 #      ^ source.blink punctuation.section.braces.blink
 #       ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
-#        ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
-#         ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
-#          ^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
-#             ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
-#              ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
-#               ^^^^^^^^^^^^^^^^^^^^^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
-#                                      ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink constant.numeric.blink
+#        ^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink storage.type.blink
+#          ^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#            ^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink storage.type.blink
+#               ^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#                 ^^^^^^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink storage.type.blink
+#                         ^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#                           ^^^^^^^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink storage.type.blink
+#                                   ^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
+#                                     ^^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink storage.type.blink
 #                                       ^ source.blink punctuation.section.braces.blink punctuation.section.parens.blink
 >}
 #^ source.blink punctuation.section.braces.blink
