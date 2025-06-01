@@ -172,7 +172,7 @@
 		"types": {
 			"patterns": [
 				{
-					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f16|f32|f64|boolean|string|buffer|unknown|Instance|Color3|vector|CFrame)\\b",
+					"match": "\\b(?:u8|u16|u32|i8|i16|i32|f16|f32|f64|boolean|string|buffer|unknown|Instance|Color3|vector|CFrame|BrickColor|DateTime|DateTimeMillis)\\b",
 					"name": "storage.type.blink"
 				}
 			]

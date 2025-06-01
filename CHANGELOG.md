@@ -1,4 +1,8 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.7
+
+- Add `BrickColor`, `DateTime`, and `DateTimeMillis` types to syntax highlighting.
+
 # 0.1.6
 
 - Add `Polling` call type to syntax highlighting.
