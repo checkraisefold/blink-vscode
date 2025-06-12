@@ -4,7 +4,13 @@ const Operators = ['false', 'true'] as const;
 const Locations = ['Client', 'Server'] as const;
 const Brand = ['Reliable', 'Unreliable'] as const;
 const YieldTypes = ['Coroutine', 'Future', 'Promise'] as const;
-const Calls = ['ManyAsync', 'SingleAsync', 'ManySync', 'SingleSync', 'Polling'] as const;
+const Calls = [
+    'ManyAsync',
+    'SingleAsync',
+    'ManySync',
+    'SingleSync',
+    'Polling',
+] as const;
 const Casing = ['Pascal', 'Camel', 'Snake'].map((value) => `"${value}"`);
 
 const Options = [
