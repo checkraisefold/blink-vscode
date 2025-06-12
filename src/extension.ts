@@ -4,7 +4,7 @@ const Operators = ['false', 'true'] as const;
 const Locations = ['Client', 'Server'] as const;
 const Brand = ['Reliable', 'Unreliable'] as const;
 const YieldTypes = ['Coroutine', 'Future', 'Promise'] as const;
-const Calls = ['ManyAsync', 'SingleAsync', 'ManySync', 'SingleSync'] as const;
+const Calls = ['ManyAsync', 'SingleAsync', 'ManySync', 'SingleSync', 'Polling'] as const;
 const Casing = ['Pascal', 'Camel', 'Snake'].map((value) => `"${value}"`);
 
 const Options = [
@@ -39,6 +39,9 @@ const types = [
     'Color3',
     'vector',
     'CFrame',
+    'BrickColor',
+    'DateTime',
+    'DateTimeMillis',
 ] as const;
 
 const WordToArray = {
@@ -62,7 +65,6 @@ const autocompleteKeys = {
         From: Locations,
         Type: Brand,
         Call: Calls,
-        Poll: Operators,
         Data: [],
     },
     function: {
@@ -77,7 +79,6 @@ const eventSnippet = [
     `\tFrom: \${2|${Locations.join()}|},`,
     `\tType: \${3|${Brand.join()}|},`,
     `\tCall: \${4|${Calls.join()}|},`,
-    `\tPoll: \${5|${Operators.join()}|},`,
     '\tData: $0\n}',
 ].join('\n');
 const functionSnippet = [

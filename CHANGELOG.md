@@ -1,4 +1,9 @@
 <!-- markdownlint-disable MD025 -->
+# 0.1.9
+
+- Add `BrickColor`, `DateTime`, and `DateTimeMillis` types, along with the `Polling` call type, to autocompletion.
+- Remove deprecated `Poll` property from autocompletion.
+
 # 0.1.8
 
 - Fix syntax highlighting for types inside of type packs.
