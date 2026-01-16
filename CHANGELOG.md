@@ -1,4 +1,8 @@
 <!-- markdownlint-disable MD025 -->
+# 0.2.0-rc1
+
+- Add support for [Blink v1.0.0](https://github.com/1Axen/blink/releases/tag/v1.0.0-pre.1), a breaking update, which heavily modifies Blink's syntax.
+
 # 0.1.9
 
 - Add `BrickColor`, `DateTime`, and `DateTimeMillis` types, along with the `Polling` call type, to autocompletion.

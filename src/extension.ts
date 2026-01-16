@@ -1,9 +1,8 @@
 import * as vscode from 'vscode';
 
 const Operators = ['false', 'true'] as const;
-const Locations = ['Client', 'Server'] as const;
+const Locations = ['Client', 'Server', 'Both'] as const;
 const Brand = ['Reliable', 'Unreliable'] as const;
-const YieldTypes = ['Coroutine', 'Future', 'Promise'] as const;
 const Calls = [
     'ManyAsync',
     'SingleAsync',
@@ -11,39 +10,42 @@ const Calls = [
     'SingleSync',
     'Polling',
 ] as const;
-const Casing = ['Pascal', 'Camel', 'Snake'].map((value) => `"${value}"`);
+const Casing = ['PascalCase', 'camelCase', 'snake_case'].map(
+    (value) => `"${value}"`
+);
 
 const Options = [
-    'Typescript',
-    'WriteValidations',
-    'Casing',
-    'ServerOutput',
-    'ClientOutput',
-    'TypesOutput',
-    'ManualReplication',
-    'UsePolling',
-    'FutureLibrary',
-    'PromiseLibrary',
+    'typescript',
+    'casing',
+    'server_output',
+    'client_output',
+    'types_output',
+    'manual_replication',
 ] as const;
 const OptionsJoined = Options.join();
 
 const types = [
     'u8',
     'u16',
+    'u24',
     'u32',
+    'u48',
     'i8',
     'i16',
+    'i24',
     'i32',
-    'f16',
+    'i48',
     'f32',
     'f64',
+    'vector',
     'boolean',
     'string',
     'buffer',
     'unknown',
     'Instance',
+    'StreamedInstance',
+    'Enum',
     'Color3',
-    'vector',
     'CFrame',
     'BrickColor',
     'DateTime',
@@ -53,45 +55,40 @@ const types = [
 const WordToArray = {
     option: Options,
 
-    Casing: Casing,
+    casing: Casing,
 
-    Typescript: Operators,
-    WriteValidations: Operators,
-    ManualReplication: Operators,
-    UsePolling: Operators,
+    typescript: Operators,
+    manual_replication: Operators,
 
-    ServerOutput: [],
-    ClientOutput: [],
-    FutureLibrary: [],
-    PromiseLibrary: [],
+    types_output: [],
+    server_output: [],
+    client_output: [],
 } as const;
 
 const autocompleteKeys = {
     event: {
-        From: Locations,
-        Type: Brand,
-        Call: Calls,
-        Data: [],
+        from: Locations,
+        type: Brand,
+        call: Calls,
+        data: [],
     },
     function: {
-        Yield: YieldTypes,
-        Data: [],
-        Return: [],
+        data: [],
+        return: [],
     },
 };
 
 const eventSnippet = [
     'event ${1:EventName} {',
-    `\tFrom: \${2|${Locations.join()}|},`,
-    `\tType: \${3|${Brand.join()}|},`,
-    `\tCall: \${4|${Calls.join()}|},`,
-    '\tData: $0\n}',
+    `\tfrom: \${2|${Locations.join()}|},`,
+    `\ttype: \${3|${Brand.join()}|},`,
+    `\tcall: \${4|${Calls.join()}|},`,
+    '\tdata: $0\n}',
 ].join('\n');
 const functionSnippet = [
     'function ${1:FuncName} {',
-    `\tYield: \${2|${YieldTypes.join()}|},`,
-    `\tReturn: $3,`,
-    '\tData: $0\n}',
+    `\treturn: $3,`,
+    '\tdata: $0\n}',
 ].join('\n');
 
 // Monaco function ports
@@ -236,15 +233,6 @@ export function activate(context: vscode.ExtensionContext) {
                                     functionSnippet
                                 ),
                                 documentation: 'Function',
-                                range: range,
-                            },
-                            {
-                                label: 'enum',
-                                kind: vscode.CompletionItemKind.Snippet,
-                                insertText: new vscode.SnippetString(
-                                    'enum ${1:EnumName} = {$0}'
-                                ),
-                                documentation: 'Enum Statement',
                                 range: range,
                             },
                             {
