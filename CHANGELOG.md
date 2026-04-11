@@ -1,4 +1,8 @@
 <!-- markdownlint-disable MD025 -->
+# Unreleased
+
+- Add `nil` and `integer` types to syntax highlighting.
+
 # 0.2.0-rc1
 
 - Add support for [Blink v1.0.0](https://github.com/1Axen/blink/releases/tag/v1.0.0-pre.1), a breaking update, which heavily modifies Blink's syntax.
