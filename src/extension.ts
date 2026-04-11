@@ -37,6 +37,8 @@ const types = [
     'i48',
     'f32',
     'f64',
+    'nil',
+    'integer',
     'vector',
     'boolean',
     'string',
