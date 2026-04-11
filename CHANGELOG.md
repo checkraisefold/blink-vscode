@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD025 -->
-# Unreleased
+# 0.2.0-rc2
 
 - Add `nil` and `integer` types to syntax highlighting.
 
